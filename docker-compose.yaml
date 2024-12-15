@@ -11,9 +11,6 @@ services:
       - "3000:3000"
       - "4200:4200"
       - "5000:5000"
-    volumes:
-      - ./config:/config
-      - ./uploads:/uploads
     environment:
       - DATABASE_URL=$DATABASE_URL
       - REDIS_URL=$REDIS_URL
