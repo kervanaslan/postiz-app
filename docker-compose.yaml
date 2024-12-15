@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  postiz:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+      target: dist
+    image: localhost/postiz
+    ports:
+      - "3000:3000"
+      - "4200:4200"
+      - "5000:5000"
+    volumes:
+      - ./config:/config
+      - ./uploads:/uploads
+    environment:
+      - NODE_ENV=production
+    restart: always
+
