@@ -39,6 +39,8 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
           frontEndUrl={process.env.FRONTEND_URL!}
           isGeneral={!!process.env.IS_GENERAL}
           enabledOpenaiSelf={!!process.env.ENABLE_OPENAI_SELF}
+          termsUrl={process.env.TERMS_URL!}
+          privacyUrl={process.env.PRIVACY_URL!}
           uploadDirectory={process.env.NEXT_PUBLIC_UPLOAD_STATIC_DIRECTORY!}
           tolt={process.env.NEXT_PUBLIC_TOLT!}
         >

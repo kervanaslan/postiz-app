@@ -83,7 +83,7 @@ export function RegisterAfter({
   token: string;
   provider: string;
 }) {
-  const {isGeneral} = useVariables();
+  const { isGeneral, termsUrl, privacyUrl } = useVariables();
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const fireEvents = useFireEvents();
@@ -112,27 +112,32 @@ export function RegisterAfter({
     await fetchData('/auth/register', {
       method: 'POST',
       body: JSON.stringify({ ...data }),
-    }).then((response) => {
-      setLoading(false);
-
-      if (response.status === 200) {
-        fireEvents('register')
-
-        if (response.headers.get('activate') === "true") {
-          router.push('/auth/activate');
-        } else {
-          router.push('/auth/login');
-        }
-      } else {
-        form.setError('email', {
-          message: getHelpfulReasonForRegistrationFailure(response.status),
-        });
-      }
-    }).catch(e => {
-      form.setError("email", {
-        message: 'General error: ' + e.toString() + '. Please check your browser console.',
-      });
     })
+      .then((response) => {
+        setLoading(false);
+
+        if (response.status === 200) {
+          fireEvents('register');
+
+          if (response.headers.get('activate') === 'true') {
+            router.push('/auth/activate');
+          } else {
+            router.push('/auth/login');
+          }
+        } else {
+          form.setError('email', {
+            message: getHelpfulReasonForRegistrationFailure(response.status),
+          });
+        }
+      })
+      .catch((e) => {
+        form.setError('email', {
+          message:
+            'General error: ' +
+            e.toString() +
+            '. Please check your browser console.',
+        });
+      });
   };
 
   return (
@@ -143,7 +148,8 @@ export function RegisterAfter({
             Sign Up
           </h1>
         </div>
-        {!isAfterProvider && (!isGeneral ? <GithubProvider /> : <GoogleProvider />)}
+        {!isAfterProvider &&
+          (!isGeneral ? <GithubProvider /> : <GoogleProvider />)}
         {!isAfterProvider && (
           <div className="h-[20px] mb-[24px] mt-[24px] relative">
             <div className="absolute w-full h-[1px] bg-fifth top-[50%] -translate-y-[50%]" />
@@ -183,14 +189,14 @@ export function RegisterAfter({
         <div className={clsx('text-[12px]', interClass)}>
           By registering you agree to our{' '}
           <a
-            href={`https://postiz.com/terms`}
+            href={termsUrl || `https://postiz.com/terms`}
             className="underline hover:font-bold"
           >
             Terms of Service
           </a>{' '}
           and{' '}
           <a
-            href={`https://postiz.com/privacy`}
+            href={privacyUrl || `https://postiz.com/privacy`}
             className="underline hover:font-bold"
           >
             Privacy Policy
@@ -198,7 +204,11 @@ export function RegisterAfter({
         </div>
         <div className="text-center mt-6">
           <div className="w-full flex">
-            <Button type="submit" className="flex-1 rounded-[4px]" loading={loading}>
+            <Button
+              type="submit"
+              className="flex-1 rounded-[4px]"
+              loading={loading}
+            >
               Create Account
             </Button>
           </div>

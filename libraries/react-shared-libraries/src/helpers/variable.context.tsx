@@ -7,6 +7,8 @@ interface VariableContextInterface {
   isGeneral: boolean;
   enabledOpenaiSelf: boolean;
   frontEndUrl: string;
+  termsUrl: string;
+  privacyUrl: string;
   plontoKey: string;
   storageProvider: 'local' | 'cloudflare';
   backendUrl: string;
