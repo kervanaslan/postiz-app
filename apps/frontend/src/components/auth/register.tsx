@@ -1,6 +1,6 @@
 'use client';
 
-import { useForm, SubmitHandler, FormProvider } from 'react-hook-form';
+import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 import { useFetch } from '@gitroom/helpers/utils/custom.fetch';
 import Link from 'next/link';
 import { Button } from '@gitroom/react/form/button';
@@ -16,6 +16,8 @@ import clsx from 'clsx';
 import { GoogleProvider } from '@gitroom/frontend/components/auth/providers/google.provider';
 import { useFireEvents } from '@gitroom/helpers/utils/use.fire.events';
 import { useVariables } from '@gitroom/react/helpers/variable.context';
+import { useTrack } from '@gitroom/react/helpers/use.track';
+import { TrackEnum } from '@gitroom/nestjs-libraries/user/track.enum';
 
 type Inputs = {
   email: string;
@@ -87,6 +89,7 @@ export function RegisterAfter({
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const fireEvents = useFireEvents();
+  const track = useTrack();
 
   const isAfterProvider = useMemo(() => {
     return !!token && !!provider;
@@ -118,12 +121,13 @@ export function RegisterAfter({
 
         if (response.status === 200) {
           fireEvents('register');
-
-          if (response.headers.get('activate') === 'true') {
-            router.push('/auth/activate');
-          } else {
-            router.push('/auth/login');
-          }
+          return track(TrackEnum.CompleteRegistration).then(() => {
+            if (response.headers.get('activate') === 'true') {
+              router.push('/auth/activate');
+            } else {
+              router.push('/auth/login');
+            }
+          });
         } else {
           form.setError('email', {
             message: getHelpfulReasonForRegistrationFailure(response.status),
