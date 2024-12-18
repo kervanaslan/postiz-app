@@ -6,6 +6,7 @@ interface VariableContextInterface {
   billingEnabled: boolean;
   isGeneral: boolean;
   frontEndUrl: string;
+  appName: string;
   plontoKey: string;
   storageProvider: 'local' | 'cloudflare',
   backendUrl: string;
@@ -18,6 +19,7 @@ const VariableContext = createContext({
   billingEnabled: false,
   isGeneral: true,
   frontEndUrl: '',
+  appName: 'Postiz',
   storageProvider: 'local',
   plontoKey: '',
   backendUrl: '',

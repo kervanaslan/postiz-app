@@ -5,10 +5,10 @@ import { internalFetch } from '@gitroom/helpers/utils/internal.fetch';
 import { redirect } from 'next/navigation';
 import { RedirectType } from 'next/dist/client/components/redirect';
 import { Metadata } from 'next';
-import { isGeneralServerSide } from '@gitroom/helpers/utils/is.general.server.side';
+import { appNameServerSide } from '@gitroom/helpers/utils/app.name.server.side';
 
 export const metadata: Metadata = {
-  title: `${isGeneralServerSide() ? 'Postiz' : 'Gitroom'} Settings`,
+  title: `${appNameServerSide()} Settings`,
   description: '',
 };
 export default async function Index({

@@ -6,17 +6,15 @@ import interClass from '@gitroom/react/helpers/inter.font';
 import { useVariables } from '@gitroom/react/helpers/variable.context';
 
 const useFaqList = () => {
-  const {isGeneral} = useVariables();
+  const { isGeneral, appName } = useVariables();
   return [
     {
-      title: `Can I trust ${isGeneral ? 'Postiz' : 'Gitroom'}?`,
-      description: `${isGeneral ? 'Postiz' : 'Gitroom'} is proudly open-source! We believe in an ethical and transparent culture, meaning that ${isGeneral ? 'Postiz' : 'Gitroom'} will live forever. You can check out the entire code or use it for personal projects. To view the open-source repository, <a href="https://github.com/gitroomhq/postiz-app" target="_blank" style="text-decoration: underline;">click here</a>.`,
+      title: `Can I trust ${appName}?`,
+      description: `${appName} is proudly open-source! We believe in an ethical and transparent culture, meaning that ${appName} will live forever. You can check out the entire code or use it for personal projects. To view the open-source repository, <a href="https://github.com/gitroomhq/postiz-app" target="_blank" style="text-decoration: underline;">click here</a>.`,
     },
     {
       title: 'What are channels?',
-      description: `${
-        isGeneral ? 'Postiz' : 'Gitroom'
-      } allows you to schedule your posts between different channels.
+      description: `${appName} allows you to schedule your posts between different channels.
 A channel is a publishing platform where you can schedule your posts.
 For example, you can schedule your posts on X, Facebook, Instagram, TikTok, YouTube, Reddit, Linkedin, Dribbble, Threads and Pinterest.`,
     },
@@ -29,7 +27,7 @@ For example, you can schedule your posts on X, Facebook, Instagram, TikTok, YouT
       description: `We automate ChatGPT to help you write your social posts and articles`,
     },
   ];
-}
+};
 
 export const FAQSection: FC<{ title: string; description: string }> = (
   props
