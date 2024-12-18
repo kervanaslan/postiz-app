@@ -67,6 +67,8 @@ services:
       - NX_ADD_PLUGINS=$NX_ADD_PLUGINS
       - IS_GENERAL=$IS_GENERAL
       - ENABLE_X_SELF=$ENABLE_X_SELF
+      - APP_NAME=$APP_NAME
+      - APP_DOMAIN=$APP_DOMAIN
       - NODE_ENV=production
     restart: always
 

@@ -54,11 +54,9 @@ export class IntegrationService {
     timezone?: number,
     customInstanceDetails?: string
   ) {
-    console.log('XXXX UPLOADING');
     const uploadedPicture = picture
       ? await this.storage.uploadSimple(picture)
       : undefined;
-    console.log('XXXX UPLOAD DONE');
     return this._integrationRepository.createOrUpdateIntegration(
       org,
       name,

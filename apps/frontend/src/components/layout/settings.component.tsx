@@ -78,8 +78,6 @@ export const SettingsPopup: FC<{ getRef?: Ref<any> }> = (props) => {
     loadProfile();
   }, []);
 
-  console.log('zaaa', enabledOpenaiSelf);
-
   return (
     <FormProvider {...form}>
       <form onSubmit={form.handleSubmit(submit)}>
