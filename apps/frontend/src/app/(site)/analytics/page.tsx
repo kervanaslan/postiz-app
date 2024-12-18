@@ -4,9 +4,10 @@ import { AnalyticsComponent } from '@gitroom/frontend/components/analytics/analy
 import { Metadata } from 'next';
 import { PlatformAnalytics } from '@gitroom/frontend/components/platform-analytics/platform.analytics';
 import { isGeneralServerSide } from '@gitroom/helpers/utils/is.general.server.side';
+import { appNameServerSide } from '@gitroom/helpers/utils/app.name.server.side';
 
 export const metadata: Metadata = {
-  title: `${isGeneralServerSide() ? 'Postiz' : 'Gitroom'} Analytics`,
+  title: `${appNameServerSide()} Analytics`,
   description: '',
 };
 

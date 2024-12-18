@@ -8,6 +8,7 @@ interface VariableContextInterface {
   enabledOpenaiSelf: boolean;
   frontEndUrl: string;
   termsUrl: string;
+  appName: string;
   privacyUrl: string;
   plontoKey: string;
   storageProvider: 'local' | 'cloudflare';
@@ -22,6 +23,7 @@ const VariableContext = createContext({
   isGeneral: true,
   enabledOpenaiSelf: false,
   frontEndUrl: '',
+  appName: 'Postiz',
   storageProvider: 'local',
   plontoKey: '',
   backendUrl: '',

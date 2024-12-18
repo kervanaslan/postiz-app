@@ -45,7 +45,7 @@ extend(isBetween);
 
 export const LayoutSettings = ({ children }: { children: ReactNode }) => {
   const fetch = useFetch();
-  const { isGeneral } = useVariables();
+  const { isGeneral, appName } = useVariables();
   const { backendUrl, billingEnabled } = useVariables();
   const load = useCallback(async (path: string) => {
     return await (await fetch(path)).json();
@@ -96,7 +96,7 @@ export const LayoutSettings = ({ children }: { children: ReactNode }) => {
                   <div
                     className={clsx(!isGeneral ? 'mt-[12px]' : 'min-w-[80px]')}
                   >
-                    {isGeneral ? (
+                    {!isGeneral ? (
                       <svg
                         width="80"
                         height="75"
@@ -122,7 +122,7 @@ export const LayoutSettings = ({ children }: { children: ReactNode }) => {
                         />
                       </svg>
                     ) : (
-                      'Gitroom'
+                      appName
                     )}
                   </div>
                 </Link>

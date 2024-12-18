@@ -11,7 +11,7 @@ import { useRouter } from 'next/navigation';
 import { useVariables } from '@gitroom/react/helpers/variable.context';
 
 export const SettingsComponent = () => {
-  const {isGeneral} = useVariables();
+  const { isGeneral } = useVariables();
   const user = useUser();
   const router = useRouter();
 
